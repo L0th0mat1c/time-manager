@@ -8,7 +8,7 @@ defmodule TimeManagerWeb.Router do
   scope "/api", TimeManagerWeb do
     pipe_through :api
     resources "/users", UserController, only: [:create, :show, :index]
-
+    resources "/clocks", ClockController, only: [:show, :create]
     #Workingtimes
     resources "/workingtimes", WorkingTimeController, only: [:show, :update, :delete]
     get "/workingtimes/:id_user", WorkingTimeController, :index
@@ -22,24 +22,24 @@ defmodule TimeManagerWeb.Router do
   # If your application does not have an admins-only section yet,
   # you can use Plug.BasicAuth to set up some basic authentication
   # as long as you are also using SSL (which you should anyway).
-  if Mix.env() in [:dev, :test] do
-    import Phoenix.LiveDashboard.Router
+  #if Mix.env() in [:dev, :test] do
+  #  import Phoenix.LiveDashboard.Router
 
-    scope "/" do
-      pipe_through [:fetch_session, :protect_from_forgery]
-      live_dashboard "/dashboard", metrics: TimeManagerWeb.Telemetry
-    end
-  end
+  #  scope "/" do
+  #    pipe_through [:fetch_session, :protect_from_forgery]
+  #    live_dashboard "/dashboard", metrics: TimeManagerWeb.Telemetry
+  #  end
+  #end
 
   # Enables the Swoosh mailbox preview in development.
   #
   # Note that preview only shows emails that were sent by the same
   # node running the Phoenix server.
-  if Mix.env() == :dev do
-    scope "/dev" do
-      pipe_through [:fetch_session, :protect_from_forgery]
-
-      forward "/mailbox", Plug.Swoosh.MailboxPreview
-    end
-  end
+  #if Mix.env() == :dev do
+  #  scope "/dev" do
+  #    pipe_through [:fetch_session, :protect_from_forgery]
+  #
+  #    forward "/mailbox", Plug.Swoosh.MailboxPreview
+  #  end
+  #end
 end

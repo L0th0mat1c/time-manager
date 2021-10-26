@@ -5,6 +5,21 @@ defmodule TimeManager.ManagementFixtures do
   """
 
   @doc """
+  Generate a clock.
+  """
+  def clock_fixture(attrs \\ %{}) do
+    {:ok, clock} =
+      attrs
+      |> Enum.into(%{
+        status: true,
+        time: ~N[2021-10-25 09:58:00]
+      })
+      |> TimeManager.Management.create_clock()
+
+    clock
+  end
+  
+  @doc """
   Generate a working_time.
   """
   def working_time_fixture(attrs \\ %{}) do
