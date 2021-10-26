@@ -28,10 +28,10 @@ jobs:
         run: |
           cd API
           mix deps.get
-      - name: Run tests
-        run: |
-          cd API
-          mix test
+      # - name: Run tests
+      #  run: |
+      #    cd API
+      #    mix test
       - name: Elixir Checks
         # You may pin to the exact commit or the version.
         # uses: sevenshores/action-elixir-checks@4f589113dc6a4101a119484cfa5cb7ccf6ca87b5
