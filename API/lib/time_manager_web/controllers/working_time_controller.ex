@@ -3,6 +3,7 @@ defmodule TimeManagerWeb.WorkingTimeController do
 
   alias TimeManager.Management
   alias TimeManager.Management.WorkingTime
+  alias TimeManager.Account
 
   action_fallback TimeManagerWeb.FallbackController
 
@@ -11,7 +12,17 @@ defmodule TimeManagerWeb.WorkingTimeController do
     render(conn, "index.json", workingtimes: workingtimes)
   end
 
-  def create(conn, %{"working_time" => working_time_params}) do
+  #def create(conn, %{"working_time" => working_time_params}) do
+  #  with {:ok, %WorkingTime{} = working_time} <- Management.create_working_time(working_time_params) do
+  #    conn
+  #    |> put_status(:created)
+  #    |> put_resp_header("location", Routes.working_time_path(conn, :show, working_time))
+  #    |> render("show.json", working_time: working_time)
+  #  end
+  #end
+
+  def create(conn, %{"id_user" => id_user, "working_time" => working_time_params}) do
+    user = Account.get_user!(id_user)
     with {:ok, %WorkingTime{} = working_time} <- Management.create_working_time(working_time_params) do
       conn
       |> put_status(:created)
