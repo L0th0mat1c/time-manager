@@ -4,6 +4,9 @@ defmodule TimeManagerWeb.ClockController do
   alias TimeManager.Management
   alias TimeManager.Management.Clock
 
+  alias TimeManager.Account
+  alias TimeManager.Account.User
+
   action_fallback TimeManagerWeb.FallbackController
 
   def index(conn, _params) do
@@ -20,18 +23,19 @@ defmodule TimeManagerWeb.ClockController do
     end
   end
 
-  def show(conn, %{"id" => id}) do
-    clock = Management.get_clock!(id)
-    render(conn, "show.json", clock: clock)
+  def show(conn, %{"userID" => userID}) do
+    # user = Account.get_user(userID)
+    clocks = Management.get_clock!(userID)
+    render(conn, "index.json", clocks: clocks)
   end
 
-  def update(conn, %{"id" => id, "clock" => clock_params}) do
-    clock = Management.get_clock!(id)
+  # def update(conn, %{"id" => id, "clock" => clock_params}) do
+  #   clock = Management.get_clock!(id)
 
-    with {:ok, %Clock{} = clock} <- Management.update_clock(clock, clock_params) do
-      render(conn, "show.json", clock: clock)
-    end
-  end
+  #   with {:ok, %Clock{} = clock} <- Management.update_clock(clock, clock_params) do
+  #     render(conn, "show.json", clock: clock)
+  #   end
+  # end
 
   def delete(conn, %{"id" => id}) do
     clock = Management.get_clock!(id)

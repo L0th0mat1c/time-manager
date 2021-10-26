@@ -21,6 +21,14 @@ defmodule TimeManager.Account do
     Repo.all(User)
   end
 
+
+  @doc """
+  Return a single user, using his username and email as parameters
+  """
+  def get_user_by_params(username, email) do
+    Repo.all(from w in User, where: w.username == ^username and w.email == ^email, select: w, limit: 1)
+  end
+
   @doc """
   Gets a single user.
 
