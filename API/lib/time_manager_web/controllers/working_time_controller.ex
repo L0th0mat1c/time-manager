@@ -5,24 +5,21 @@ defmodule TimeManagerWeb.WorkingTimeController do
   alias TimeManager.Management.WorkingTime
   alias TimeManager.Account
 
+  require Logger
+
   action_fallback TimeManagerWeb.FallbackController
 
-  def index(conn, _params) do
-    workingtimes = Management.list_workingtimes()
-    render(conn, "index.json", workingtimes: workingtimes)
+  def index(conn, %{"userID" => userID} = _params) do
+    if (_params["start"] != nil and _params["end"] != nil) do
+      workingtimes = Management.get_working_time_by_user!(userID, _params["start"], _params["end"])
+      render(conn, "index.json", workingtimes: workingtimes)
+    else
+      workingtimes = Management.get_working_time!(userID)
+      render(conn, "show.json", working_time: workingtimes)
+    end
   end
 
-  #def create(conn, %{"working_time" => working_time_params}) do
-  #  with {:ok, %WorkingTime{} = working_time} <- Management.create_working_time(working_time_params) do
-  #    conn
-  #    |> put_status(:created)
-  #    |> put_resp_header("location", Routes.working_time_path(conn, :show, working_time))
-  #    |> render("show.json", working_time: working_time)
-  #  end
-  #end
-
-  def create(conn, %{"id_user" => id_user, "working_time" => working_time_params}) do
-    user = Account.get_user!(id_user)
+  def create(conn, %{"userID" => userID, "working_time" => working_time_params}) do
     with {:ok, %WorkingTime{} = working_time} <- Management.create_working_time(working_time_params) do
       conn
       |> put_status(:created)
@@ -30,6 +27,15 @@ defmodule TimeManagerWeb.WorkingTimeController do
       |> render("show.json", working_time: working_time)
     end
   end
+
+  #def create(conn, %{"userID" => userID, "working_time" => working_time_params}) do
+  #  with {:ok, %WorkingTime{} = working_time} <- Management.create_working_time(working_time_params) do
+  #    conn
+  #    |> put_status(:created)
+  #    |> put_resp_header("location", Routes.working_time_path(conn, :show, working_time))
+  #    |> render("show.json", working_time: working_time)
+  #  end
+  #end
 
   def show(conn, %{"id" => id}) do
     working_time = Management.get_working_time!(id)

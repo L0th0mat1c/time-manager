@@ -7,6 +7,7 @@ defmodule TimeManager.Management do
   alias TimeManager.Repo
 
   alias TimeManager.Management.Clock
+  alias TimeManager.Account.User
 
   @doc """
   Returns the list of clocks.
@@ -99,6 +100,7 @@ defmodule TimeManager.Management do
 
   """
   def create_working_time(attrs \\ %{}) do
+    
     %WorkingTime{}
     |> WorkingTime.changeset(attrs)
     |> Repo.insert()
@@ -196,5 +198,9 @@ defmodule TimeManager.Management do
   """
   def change_working_time(%WorkingTime{} = working_time, attrs \\ %{}) do
     WorkingTime.changeset(working_time, attrs)
+  end
+
+  def get_working_time_by_user!(userID, date_start, date_end) do
+    Repo.all(from w in WorkingTime, where: w.user == ^userID and w.start == ^date_start and w.end == ^date_end, select: w)
   end
 end
