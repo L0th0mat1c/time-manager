@@ -4,6 +4,9 @@ defmodule TimeManagerWeb.ClockController do
   alias TimeManager.Management
   alias TimeManager.Management.Clock
 
+  alias TimeManager.Account
+  alias TimeManager.Account.User
+
   action_fallback TimeManagerWeb.FallbackController
 
   def index(conn, _params) do
@@ -21,6 +24,7 @@ defmodule TimeManagerWeb.ClockController do
   end
 
   def show(conn, %{"userID" => userID}) do
+    user = Account.get_user(userID)
     clock = Management.get_clock!(userID)
     render(conn, "show.json", clock: clock)
   end

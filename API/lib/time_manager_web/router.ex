@@ -8,7 +8,7 @@ defmodule TimeManagerWeb.Router do
   scope "/api", TimeManagerWeb do
     pipe_through :api
     #User
-    resources "/users", UserController, only: [:create, :show, :index, :edit, :delete]
+    resources "/users", UserController, only: [:create, :show, :index, :update, :delete]
 
     #Clock
     get "/clocks/:userID", ClockController, :show
