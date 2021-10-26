@@ -24,18 +24,18 @@ defmodule TimeManagerWeb.ClockController do
   end
 
   def show(conn, %{"userID" => userID}) do
-    user = Account.get_user(userID)
-    clock = Management.get_clock!(userID)
-    render(conn, "show.json", clock: clock)
+    # user = Account.get_user(userID)
+    clocks = Management.get_clock!(userID)
+    render(conn, "index.json", clocks: clocks)
   end
 
-  def update(conn, %{"id" => id, "clock" => clock_params}) do
-    clock = Management.get_clock!(id)
+  # def update(conn, %{"id" => id, "clock" => clock_params}) do
+  #   clock = Management.get_clock!(id)
 
-    with {:ok, %Clock{} = clock} <- Management.update_clock(clock, clock_params) do
-      render(conn, "show.json", clock: clock)
-    end
-  end
+  #   with {:ok, %Clock{} = clock} <- Management.update_clock(clock, clock_params) do
+  #     render(conn, "show.json", clock: clock)
+  #   end
+  # end
 
   def delete(conn, %{"id" => id}) do
     clock = Management.get_clock!(id)
