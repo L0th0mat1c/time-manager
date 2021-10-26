@@ -7,6 +7,7 @@ defmodule TimeManagerWeb.Router do
 
   scope "/api", TimeManagerWeb do
     pipe_through :api
+
     #User
     get "/users", UserController, :index
     get "/users/:userID", UserController, :show
@@ -19,9 +20,10 @@ defmodule TimeManagerWeb.Router do
     post "/clocks/:userID", ClockController, :create
 
     #Workingtimes
-    resources "/workingtimes", WorkingTimeController, only: [:show, :update, :delete]
+    resources "/workingtimes", WorkingTimeController, only: [:update, :delete]
     get "/workingtimes/:userID", WorkingTimeController, :index
-    post "/workingtimes/:userID", WorkingTimeController, :create
+    #post "/workingtimes/:userID", WorkingTimeController, :create
+    post "/workingtimes", WorkingTimeController, :create
   end
 
   # Enables LiveDashboard only for development
