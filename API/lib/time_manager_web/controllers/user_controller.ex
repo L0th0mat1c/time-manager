@@ -6,9 +6,14 @@ defmodule TimeManagerWeb.UserController do
 
   action_fallback TimeManagerWeb.FallbackController
 
-  def index(conn, _params) do
-    users = Account.list_users()
-    render(conn, "index.json", users: users)
+  def index(conn, params) do
+    if (params["username"] != nil and params["email"] != nil) do
+      users = Account.get_user_by_params(params["username"], params["email"])
+      render(conn, "index.json", users: users)
+    else
+      users = Account.list_users()
+      render(conn, "index.json", users: users)
+    end
   end
 
   def create(conn, %{"user" => user_params}) do
