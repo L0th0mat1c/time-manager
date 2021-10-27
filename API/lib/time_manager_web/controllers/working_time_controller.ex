@@ -15,15 +15,15 @@ defmodule TimeManagerWeb.WorkingTimeController do
       render(conn, "index.json", workingtimes: workingtimes)
     else
       workingtimes = Management.get_working_time!(userID)
-      render(conn, "show.json", working_time: workingtimes)
+      render(conn, "index.json", workingtimes: workingtimes)
     end
   end
 
   def create(conn, %{"userID" => userID, "working_time" => working_time_params}) do
-    with {:ok, %WorkingTime{} = working_time} <- Management.create_working_time(working_time_params) do
+    with {:ok, %WorkingTime{} = working_time} <- Management.create_working_time(userID, working_time_params) do
       conn
       |> put_status(:created)
-      |> put_resp_header("location", Routes.working_time_path(conn, :show, working_time))
+      |> put_resp_header("location", Routes.working_time_path(conn, :create, working_time))
       |> render("show.json", working_time: working_time)
     end
   end
@@ -36,6 +36,12 @@ defmodule TimeManagerWeb.WorkingTimeController do
   #    |> render("show.json", working_time: working_time)
   #  end
   #end
+    def showByUser(conn, %{"userID" => userID, "id" => id}) do
+    IO.puts("test contreoller, #{id}")
+    working_time = Management.get_working_time_by_user!(userID, id)
+    IO.inspect binding()
+    render(conn, "show.json", working_time: working_time)
+  end
 
   def show(conn, %{"id" => id}) do
     working_time = Management.get_working_time!(id)
