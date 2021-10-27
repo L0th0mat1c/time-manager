@@ -14,8 +14,8 @@ defmodule TimeManagerWeb.ClockController do
     render(conn, "index.json", clocks: clocks)
   end
 
-  def create(conn, %{"clock" => clock_params}) do
-    with {:ok, %Clock{} = clock} <- Management.create_clock(clock_params) do
+  def create(conn, %{"userID" => userID, "clock" => clock_params}) do
+    with {:ok, %Clock{} = clock} <- Management.create_clock(userID, clock_params) do
       conn
       |> put_status(:created)
       |> put_resp_header("location", Routes.clock_path(conn, :show, clock))
@@ -37,11 +37,11 @@ defmodule TimeManagerWeb.ClockController do
   #   end
   # end
 
-  def delete(conn, %{"id" => id}) do
-    clock = Management.get_clock!(id)
+  # def delete(conn, %{"id" => id}) do
+  #   clock = Management.get_clock!(id)
 
-    with {:ok, %Clock{}} <- Management.delete_clock(clock) do
-      send_resp(conn, :no_content, "")
-    end
-  end
+  #   with {:ok, %Clock{}} <- Management.delete_clock(clock) do
+  #     send_resp(conn, :no_content, "")
+  #   end
+  # end
 end

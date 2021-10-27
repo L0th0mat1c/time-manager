@@ -52,9 +52,10 @@ defmodule TimeManager.Management do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_clock(attrs \\ %{}) do
+  def create_clock(userID, attrs \\ %{}) do
     %Clock{}
     |> Clock.changeset(attrs)
+    |> Ecto.Changeset.put_change(:user, String.to_integer(userID))
     |> Repo.insert()
   end
 
@@ -87,7 +88,13 @@ defmodule TimeManager.Management do
       ** (Ecto.NoResultsError)
 
   """
-  def get_working_time!(id), do: Repo.get!(WorkingTime, id)
+  def get_working_time!(userID) do
+    Repo.all(from w in WorkingTime, where: w.user == ^userID, select: w)
+  end
+
+  def get_working_time_by_user!(userID, id) do
+    Repo.get_by(WorkingTime, user: userID, id: id)
+  end
 
   @doc """
   Creates a working_time.
@@ -101,10 +108,11 @@ defmodule TimeManager.Management do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_working_time(attrs \\ %{}) do
+  def create_working_time(userID, attrs \\ %{}) do
     
     %WorkingTime{}
     |> WorkingTime.changeset(attrs)
+    |> Ecto.Changeset.put_change(:user, String.to_integer(userID))
     |> Repo.insert()
   end
 
