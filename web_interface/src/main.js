@@ -10,6 +10,9 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { fas } from "@fortawesome/free-solid-svg-icons";
 import VueChartkick from 'vue-chartkick'
 import 'chartkick/chart.js'
+VueChartkick.options = {
+  colors: ["#ffa333", "#525252"]
+}
 
 library.add(fas);
 
