@@ -45,7 +45,8 @@ export default {
   data: () => ({
     listRoutes: [
       { route: "/", name: "home", icon: "home" },
-      { route: "about", name: "about", icon: "question" },
+      { route: "/workingtimes/1", name: "work", icon: "business-time" },
+      { route: "/about", name: "about", icon: "question" },
     ],
   }),
   mounted() {
