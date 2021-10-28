@@ -47,9 +47,10 @@ export default {
         let config = {
           method: "POST",
           body: JSON.stringify({
-            start: this.date[0],
-            end: this.date[1],
-            user: this.userID,
+            working_time: {
+              start: this.date[0],
+              end: this.date[1],
+            },
           }),
         };
         fetch("http://localhost:4000/api/workingtimes/" + this.userID, config);
