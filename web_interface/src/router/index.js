@@ -16,6 +16,30 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/About.vue"),
   },
+  {
+    path: "/workingtimes/:userID",
+    name: "Work",
+    component: () =>
+      import("../views/WorkingTimesView.vue"),
+  },
+  {
+    path: "/workingtime/:userID",
+    name: "WorkCreate",
+    component: () =>
+      import("../views/WorkingTimesView.vue"),
+    props: {
+      edit: true
+    }
+  },
+  {
+    path: "/workingtime/:userID/:wtID",
+    name: "WorkEdit",
+    component: () =>
+      import("../views/WorkingTimesView.vue"),
+    props: {
+      edit: true
+    }
+  }
 ];
 
 const router = createRouter({

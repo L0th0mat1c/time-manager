@@ -12,8 +12,8 @@ import { fas } from "@fortawesome/free-solid-svg-icons";
 library.add(fas);
 
 createApp(App)
-  .component("fa", FontAwesomeIcon)
-  .use(ElementPlus)
-  .use(store)
-  .use(router)
-  .mount("#app");
+    .component("fa", FontAwesomeIcon)
+    .use(ElementPlus)
+    .use(store)
+    .use(router)
+    .mount("#app");
