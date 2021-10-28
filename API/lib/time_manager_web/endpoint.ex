@@ -45,5 +45,7 @@ defmodule TimeManagerWeb.Endpoint do
   plug Plug.Head
   plug Plug.Session, @session_options
   plug CORSPlug, origins: "*"
+  # plug Corsica
+  # plug CORSPlug, origins: "http://localhost:8081", methods: ["GET"]
   plug TimeManagerWeb.Router
 end

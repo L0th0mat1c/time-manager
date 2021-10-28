@@ -1,11 +1,18 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import Home from "../views/Home.vue";
+import Clock from "../views/Clock.vue";
+import Chart from "../views/Chart.vue";
 
 const routes = [
   {
     path: "/",
     name: "Home",
     component: Home,
+  },
+  {
+    path: "/clock/:username",
+    name: "Clock",
+    component: Clock,
   },
   {
     path: "/about",
@@ -39,6 +46,11 @@ const routes = [
     props: {
       edit: true
     }
+  },
+  {
+    path: "/chartManager/:userid",
+    name: "Chart",
+    component: Chart,
   }
 ];
 
