@@ -45,7 +45,7 @@ export default {
   data: () => ({
     listRoutes: [
       { route: "/", name: "home", icon: "home" },
-      { route: "/about", name: "about", icon: "question" },
+      { route: "/clock/test", name: "Clock", icon: "clock" },
       { route: "/chartManager/test", name: "Charts", icon: "star" },
     ],
   }),

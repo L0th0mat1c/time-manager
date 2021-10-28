@@ -4,10 +4,10 @@
       <button class="button_refresh" v-on:click="refresh()">Refresh</button>
       <h1>Horloge</h1>
       <div v-if="this.startDateTime">
-        Lilian travaille depuis <span style="color:orange">{{this.duree['H']}}</span> heure(s), <span style="color:orange">{{this.duree['M']}}</span> minute(s) et <span style="color:orange">{{this.duree['S']}}</span> seconde(s).
+        (Username) travaille depuis <span style="color:orange">{{this.duree['H']}}</span> heure(s), <span style="color:orange">{{this.duree['M']}}</span> minute(s) et <span style="color:orange">{{this.duree['S']}}</span> seconde(s).
       </div>
       <div v-if="!this.startDateTime">
-        Lilian ne travaille pas actuellement.
+        (Username) ne travaille pas actuellement.
       </div>
 
       <button class="button_stop" v-on:click="clock()" v-if="this.clockIn">Arrêter</button>
@@ -130,7 +130,7 @@ export default {
   padding:10px 20px;;
   border-radius:5px;
   font-size:16px;
-  margin-top:10px;
+  margin-top:5px;
   right:30px;
   position:absolute;
 }
