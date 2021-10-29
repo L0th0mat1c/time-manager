@@ -56,14 +56,14 @@ export default {
 
 <style>
 .el-header {
-  background-color: #545c64;
+  background-color: #525252;
   color: var(--el-text-color-primary);
   line-height: 60px;
 }
 .el-aside {
   color: var(--el-text-color-primary);
   font-size: 30;
-  background-color: #545c64;
+  background-color: #525252;
   height: 100vh;
 }
 a {
@@ -71,7 +71,7 @@ a {
   color: white;
 }
 .el-menu-item {
-  background-color: #545c64;
+  background-color: #525252;
   height: 100px;
 }
 </style>

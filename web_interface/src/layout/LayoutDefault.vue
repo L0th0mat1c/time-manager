@@ -2,9 +2,9 @@
   <el-container v-if="user && user.email" style="height: 100vh">
     <el-aside width="250px">
       <img
-        style="height: 150px; width: 150px; margin: 10px"
+        style=" width: 150px; margin: 10px;margin-bottom:50px;"
         alt="Vue logo"
-        src="../assets/time_manager_logo.png"
+        src="../assets/time_managerlogo.png"
       />
 
       <el-menu id="v-for-object">
@@ -93,14 +93,14 @@ export default {
 
 <style>
 .el-header {
-  background-color: #545c64;
-  color: var(--el-text-color-primary);
+  background-color: rgb(36, 36, 36);
+  color: white;
   line-height: 60px;
 }
 .el-aside {
-  color: var(--el-text-color-primary);
+  color: white;
   font-size: 30;
-  background-color: #545c64;
+  background-color: rgb(36, 36, 36);
   height: 100vh;
 }
 a {
@@ -108,7 +108,15 @@ a {
   color: white;
 }
 .el-menu-item {
-  background-color: #545c64;
-  height: 100px;
+  background-color: rgb(36, 36, 36)!important;
+  color:white!important;
+}
+.el-menu-item:hover {
+  background-color: #ffa333!important;
+  color:white!important;
+}
+.el-menu-item.is-active {
+  background-color: rgb(36, 36, 36)!important;
+  color:#ffa333!important;
 }
 </style>
