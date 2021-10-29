@@ -4,10 +4,10 @@
       <button class="button_refresh" v-on:click="refresh()">Refresh</button>
       <h1>Horloge</h1>
       <div v-if="this.startDateTime">
-        (Username) travaille depuis <span style="color:orange">{{this.duree['H']}}</span> heure(s), <span style="color:orange">{{this.duree['M']}}</span> minute(s) et <span style="color:orange">{{this.duree['S']}}</span> seconde(s).
+        {{user.username}} travaille depuis <span style="color:orange">{{this.duree['H']}}</span> heure(s), <span style="color:orange">{{this.duree['M']}}</span> minute(s) et <span style="color:orange">{{this.duree['S']}}</span> seconde(s).
       </div>
       <div v-if="!this.startDateTime">
-        (Username) ne travaille pas actuellement.
+        {{user.username}} ne travaille pas actuellement.
       </div>
 
       <button class="button_stop" v-on:click="clock()" v-if="this.clockIn">Arrêter</button>
@@ -18,17 +18,29 @@
 
 <script>
 import moment from 'moment';
+import { computed } from "vue";
+import { useStore } from "vuex";
 
 export default {
   name: "ClockComponent",
   props: {
     msg: String,
   },
+  setup() {
+    const store = useStore();
+    const user = computed(
+      () => store.state.user && JSON.parse(store.state.user)
+    );
+
+    return {
+      user,
+    };
+  },
   data() {
     return {
       clockIn: false,
       startDateTime: null,
-      userID: 1,
+      userID: this.user.id,
       duree: {
         'H': '00',
         'M': '00',
