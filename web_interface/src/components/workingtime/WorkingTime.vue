@@ -44,7 +44,7 @@ export default {
   methods: {
     createWorkingTime() {
       if (this.date[0] !== null && this.date[1] !== null) {
-        let config = {
+        /*let config = {
           method: "POST",
           body: JSON.stringify({
             working_time: {
@@ -53,7 +53,13 @@ export default {
             },
           }),
         };
-        fetch("http://localhost:4000/api/workingtimes/" + this.userID, config);
+        fetch("http://localhost:4000/api/workingtimes/" + this.userID, config);*/
+        this.$store
+          .dispatch("requestPOST", {
+            url: "workingtimes/" + this.userID,
+            body: { working_time: { start: this.date[0], end: this.date[1] } },
+          })
+          .catch((err) => console.log(err));
       }
     },
     updateWorkingTime() {
