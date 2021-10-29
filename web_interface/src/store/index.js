@@ -56,11 +56,11 @@ export default createStore({
         const { data } = await Axios.get(url);
         const user = data.data[0];
         localStorage.setItem("user", JSON.stringify(user));
-        this.$router.push("/");
+        return true;
         // Axios.defaults.headers.common["Authorization"] = token;
       } catch (err) {
-        console.log(err);
         localStorage.removeItem("token");
+        return err;
       }
     },
     async requestGET(_, { url }) {
