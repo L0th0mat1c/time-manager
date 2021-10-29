@@ -15,7 +15,7 @@
         >
           <router-link :to="list.route">
             <el-menu-item :index="index + 1">
-              <el-row justify="center" :gutter="20">
+              <el-row :gutter="20">
                 <el-col :span="8"><fa :icon="list.icon" size="lg" /></el-col>
                 <el-col :span="8"
                   ><span style="font-size: 18px">{{
