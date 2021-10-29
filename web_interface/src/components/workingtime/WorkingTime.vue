@@ -44,35 +44,33 @@ export default {
   methods: {
     createWorkingTime() {
       if (this.date[0] !== null && this.date[1] !== null) {
-        /*let config = {
-          method: "POST",
-          body: JSON.stringify({
-            working_time: {
-              start: this.date[0],
-              end: this.date[1],
-            },
-          }),
-        };
-        fetch("http://localhost:4000/api/workingtimes/" + this.userID, config);*/
         this.$store
           .dispatch("requestPOST", {
             url: "workingtimes/" + this.userID,
             body: { working_time: { start: this.date[0], end: this.date[1] } },
           })
+          .then(() => console.log("Working time created !!!"))
           .catch((err) => console.log(err));
       }
     },
     updateWorkingTime() {
-      console.log("Update this workingtime");
+      if (this.date[0] !== null && this.date[1] !== null) {
+        this.$store
+          .dispatch("requestPUT", {
+            url: "workingtimes/" + this.workingTimeID,
+            body: { working_time: { start: this.date[0], end: this.date[1] } },
+          })
+          .then(() => console.log("Working time updated !!!"))
+          .catch((err) => console.log(err));
+      }
     },
     deleteWorkingTime() {
-      let config = {
-        method: "DELETE",
-      };
-      fetch(
-        "http://localhost:4000/api/workingtimes/" + this.workingTimeID,
-        config
-      );
+      this.$store
+        .dispatch("requestDELETE", {
+          url: "workingtimes/" + this.workingTimeID,
+        })
+        .then(() => console.log("Working time deleted !!!"))
+        .catch((err) => console.log(err));
     },
     initComponent() {
       if (this.workingTimeID > 0) {
