@@ -83,6 +83,22 @@ export default createStore({
         return err;
       }
     },
+    async requestPUT(_, { url, body }) {
+      try {
+        await Axios.put(url, body);
+      } catch (err) {
+        console.log(err);
+        localStorage.removeItem("token");
+      }
+    },
+    async requestDELETE(_, { url }) {
+      try {
+        await Axios.delete(url);
+      } catch (err) {
+        console.log(err);
+        localStorage.removeItem("token");
+      }
+    },
     logout({ commit }) {
       commit("logout");
       localStorage.removeItem("token");

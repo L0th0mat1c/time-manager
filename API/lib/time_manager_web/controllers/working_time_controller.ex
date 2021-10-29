@@ -14,7 +14,7 @@ defmodule TimeManagerWeb.WorkingTimeController do
       workingtimes = Management.get_working_time_by_user!(userID, _params["start"], _params["end"])
       render(conn, "index.json", workingtimes: workingtimes)
     else
-      workingtimes = Management.get_working_time!(userID)
+      workingtimes = Management.get_all_working_time_by_user!(userID)
       render(conn, "index.json", workingtimes: workingtimes)
     end
   end
