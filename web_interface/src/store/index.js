@@ -75,10 +75,12 @@ export default createStore({
     },
     async requestPOST(_, { url, body }) {
       try {
-        await Axios.post(url, body);
+        const res = await Axios.post(url, body);
+        return res;
       } catch (err) {
         console.log(err);
         localStorage.removeItem("token");
+        return err;
       }
     },
     logout({ commit }) {

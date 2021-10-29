@@ -76,16 +76,22 @@ export default {
     },
     clock() {
       if(this.clockIn == true) {
-        const jsonData = JSON.stringify({"status": "false","time": moment().format('YYYY-MM-DD HH:mm:ss'),"user": this.userID,});
-        fetch('http://localhost:4000/api/clocks/'+this.userID, {method: 'POST', body: jsonData})
-        .then(res => res.json())
-        .then(this.fetchClocks);
+        this.$store
+          .dispatch("requestPOST", {
+            url: "clocks/" + this.userID,
+            body: { clock: { status: false, time: moment().format('YYYY-MM-DD HH:mm:ss') } },
+          })
+          .then(this.fetchClocks)
+          .catch((err) => console.log(err));
       }
       else {
-        const jsonData = JSON.stringify({"status": "true","time": moment().format('YYYY-MM-DD HH:mm:ss'),"user": this.userID,});
-        fetch('http://localhost:4000/api/clocks/'+this.userID, {method: 'POST', body: jsonData})
-        .then(res => res.json())
-        .then(this.fetchClocks);
+        this.$store
+          .dispatch("requestPOST", {
+            url: "clocks/" + this.userID,
+            body: { clock: { status: true, time: moment().format('YYYY-MM-DD HH:mm:ss') } },
+          })
+          .then(this.fetchClocks)
+          .catch((err) => console.log(err));
       }
     },
     refresh() {
