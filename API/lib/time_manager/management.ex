@@ -92,6 +92,8 @@ defmodule TimeManager.Management do
     Repo.all(from w in WorkingTime, where: w.user == ^userID, select: w)
   end
 
+  def get_working_time_by_id!(id), do: Repo.get!(WorkingTime, id)
+
   def get_working_time_by_user!(userID, id) do
     Repo.get_by(WorkingTime, user: userID, id: id)
   end

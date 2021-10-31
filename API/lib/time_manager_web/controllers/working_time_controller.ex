@@ -37,9 +37,7 @@ defmodule TimeManagerWeb.WorkingTimeController do
   #  end
   #end
     def showByUser(conn, %{"userID" => userID, "id" => id}) do
-    IO.puts("test contreoller, #{id}")
     working_time = Management.get_working_time_by_user!(userID, id)
-    IO.inspect binding()
     render(conn, "show.json", working_time: working_time)
   end
 
@@ -49,7 +47,7 @@ defmodule TimeManagerWeb.WorkingTimeController do
   end
 
   def update(conn, %{"id" => id, "working_time" => working_time_params}) do
-    working_time = Management.get_working_time!(id)
+    working_time = Management.get_working_time_by_id!(id)
 
     with {:ok, %WorkingTime{} = working_time} <- Management.update_working_time(working_time, working_time_params) do
       render(conn, "show.json", working_time: working_time)
@@ -57,7 +55,7 @@ defmodule TimeManagerWeb.WorkingTimeController do
   end
 
   def delete(conn, %{"id" => id}) do
-    working_time = Management.get_working_time!(id)
+    working_time = Management.get_working_time_by_id!(id)
 
     with {:ok, %WorkingTime{}} <- Management.delete_working_time(working_time) do
       send_resp(conn, :no_content, "")
