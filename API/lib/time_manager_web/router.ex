@@ -11,7 +11,7 @@ defmodule TimeManagerWeb.Router do
     #User
     get "/users", UserController, :index
     get "/users/:userID", UserController, :show
-    post "/users/:userID", UserController, :create
+    post "/users/", UserController, :create
     put "/users/:userID", UserController, :update
     delete "/users/:userID", UserController, :delete
 

@@ -4,19 +4,22 @@ FROM node:lts-alpine
 RUN npm install -g http-server
 
 # définit le dossier 'app' comme dossier de travail
+RUN mkdir /app
+COPY . /app
 WORKDIR /app
-
 # copie 'package.json' et 'package-lock.json' (si disponible)
+# RUN ls
 COPY package*.json ./
-
-# installe les dépendances du projet
+# # installe les dépendances du projet
 RUN npm install
+
 
 # copie les fichiers et dossiers du projet dans le dossier de travail (par exemple : le dossier 'app')
 COPY . .
 
 # construit l'app pour la production en la minifiant
-RUN npm run build
-
+# RUN npm run build
+# RUN cd web_interface
 EXPOSE 8080
-CMD [ "http-server", "dist" ]
+CMD ["npm", "run", "serve"]
+

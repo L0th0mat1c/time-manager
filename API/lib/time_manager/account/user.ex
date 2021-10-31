@@ -14,6 +14,6 @@ defmodule TimeManager.Account.User do
   def changeset(user, attrs) do
     user
     |> cast(attrs, [:username, :email, :password])
-    |> validate_required([:username, :email])
+    |> validate_required([:username, :email, :password])
   end
 end

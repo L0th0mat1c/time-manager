@@ -2,10 +2,11 @@ import Config
 
 # Configure your database
 config :time_manager, TimeManager.Repo,
-  username: "postgres",
-  password: "postgres",
-  database: "time_manager_dev",
-  hostname: "localhost",
+  username: System.get_env("PGUSER") || "postgres",
+  password: System.get_env("PGPASSWORD") || "postgres",
+  database: System.get_env("PGDATABASE") || "time_manager_dev",
+  hostname: System.get_env("PGHOST") || "localhost",
+
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
 

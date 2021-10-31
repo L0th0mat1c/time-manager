@@ -10,7 +10,10 @@ defmodule TimeManager.MixProject do
       compilers: [:gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+      name: "Time Manager API",
+      docs: [main: "Time Manager API",
+            extras: ["README.md"]]
     ]
   end
 
@@ -44,7 +47,8 @@ defmodule TimeManager.MixProject do
       {:gettext, "~> 0.18"},
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
-      {:cors_plug, "~> 2.0"}
+      {:cors_plug, "~> 2.0"},
+      {:ex_doc, "~> 0.24", only: :dev, runtime: false}
     ]
   end
 

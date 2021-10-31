@@ -6,6 +6,9 @@ defmodule TimeManagerWeb.UserController do
 
   action_fallback TimeManagerWeb.FallbackController
 
+  @doc """
+    Get all users.
+  """
   def index(conn, params) do
     if (params["username"] != nil and params["email"] != nil) do
       users = Account.get_user_by_params(params["username"], params["email"])
@@ -16,6 +19,9 @@ defmodule TimeManagerWeb.UserController do
     end
   end
 
+  @doc """
+    Get an user by his id.
+  """
   def create(conn, %{"user" => user_params}) do
     with {:ok, %User{} = user} <- Account.create_user(user_params) do
       conn
@@ -25,12 +31,12 @@ defmodule TimeManagerWeb.UserController do
     end
   end
 
-  def show(conn, %{"id" => id}) do
+  def show(conn, %{"userID" => id}) do
     user = Account.get_user!(id)
     render(conn, "show.json", user: user)
   end
 
-  def update(conn, %{"id" => id, "user" => user_params}) do
+  def update(conn, %{"userID" => id, "user" => user_params}) do
     user = Account.get_user!(id)
 
     with {:ok, %User{} = user} <- Account.update_user(user, user_params) do
@@ -38,7 +44,7 @@ defmodule TimeManagerWeb.UserController do
     end
   end
 
-  def delete(conn, %{"id" => id}) do
+  def delete(conn, %{"userID" => id}) do
     user = Account.get_user!(id)
 
     with {:ok, %User{}} <- Account.delete_user(user) do
