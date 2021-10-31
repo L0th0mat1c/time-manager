@@ -33,7 +33,7 @@ jobs:
           cd API
           mix test
       - name: Elixir Checks
-        continue-on-error: true
+        # continue-on-error: true
         # You may pin to the exact commit or the version.
         # uses: sevenshores/action-elixir-checks@4f589113dc6a4101a119484cfa5cb7ccf6ca87b5
         uses: sevenshores/action-elixir-checks@v0.1.2-alpha
