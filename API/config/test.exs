@@ -9,7 +9,7 @@ config :time_manager, TimeManager.Repo,
   username: System.get_env("PGUSER") || "postgres",
   password: System.get_env("PGPASSWORD") || "postgres",
   database: System.get_env("PGDATABASE") || "time_manager_test",
-  hostname: System.get_env("PGHOST") || "db",
+  hostname: System.get_env("PGHOST") || "localhost",
 
   pool: Ecto.Adapters.SQL.Sandbox,
   pool_size: 10
