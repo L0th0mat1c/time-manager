@@ -14,7 +14,8 @@ RUN mix local.hex --force
 RUN mix local.rebar --force
 
 # Compile the project
-RUN ls && \ 
-    mix deps.get
+RUN mix deps.get
 
-CMD ["./entrypoint.sh"]
+EXPOSE 4000
+
+# CMD ["./entrypoint.sh"]

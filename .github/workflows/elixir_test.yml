@@ -1,0 +1,22 @@
+name: Elixir CI TEST API
+
+on:
+  pull_request:
+    branches:
+      - main
+      - development
+
+jobs:
+  test:
+    name: Test API
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout master
+        uses: actions/checkout@v2
+      - name: Build docker compose
+        run: docker-compose up test
+      - name: Publish Unit Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v1
+        if: always()
+        with:
+          files: test-results/**/*.xml
