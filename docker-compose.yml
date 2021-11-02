@@ -22,7 +22,7 @@ services:
       - ./API/.env
     volumes:
       - .:/app/API
-    # command: mix phx.server
+    command: mix phx.server
   web:
     build: ./web_interface
     ports:
