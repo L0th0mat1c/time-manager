@@ -6,10 +6,11 @@ import Config
 # to provide built-in test partitioning in CI environment.
 # Run `mix help test` for more information.
 config :time_manager, TimeManager.Repo,
-  username: "postgres",
-  password: "postgres",
-  database: "time_manager_test#{System.get_env("MIX_TEST_PARTITION")}",
-  hostname: "localhost",
+  username: System.get_env("PGUSER") || "postgres",
+  password: System.get_env("PGPASSWORD") || "postgres",
+  database: System.get_env("PGDATABASE") || "time_manager_test",
+  hostname: System.get_env("PGHOST") || "localhost",
+
   pool: Ecto.Adapters.SQL.Sandbox,
   pool_size: 10
 

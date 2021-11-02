@@ -16,12 +16,25 @@ services:
     build: ./API
     ports:
       - "4000:4000"
-
     depends_on:
       - db
     env_file:
       - ./API/.env
+    volumes:
+      - .:/app/API
+    # command: mix phx.server
   web:
     build: ./web_interface
     ports:
       - "8081:8080"
+    volumes:
+      - .:/app/web_interface
+
+  test:
+    build:
+      context: ./API
+      dockerfile: test.Dockerfile
+    volumes:
+      - .:/app/test_result
+    depends_on:
+      - db
