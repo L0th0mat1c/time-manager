@@ -18,4 +18,5 @@ jobs:
         uses: EnricoMi/publish-unit-test-result-action@v1
         if: always()
         with:
-        files: test/api_test/test.xml
+          name: Unit Test Results
+          path: test-results/**/*.xml
