@@ -4,7 +4,8 @@ setup:
       as: DATABASE
 build:
   docker:
-    web: Dockerfile
+    web: web_interface/Dockerfile
+    api: API/Dockerfile
   config:
     MIX_ENV: prod
     SECRET_KEY_BASE: $SECRET_KEY_BASE
