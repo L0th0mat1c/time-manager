@@ -75,7 +75,25 @@ export default createStore({
     },
     async requestPOST(_, { url, body }) {
       try {
-        await Axios.post(url, body);
+        const res = await Axios.post(url, body);
+        return res;
+      } catch (err) {
+        console.log(err);
+        localStorage.removeItem("token");
+        return err;
+      }
+    },
+    async requestPUT(_, { url, body }) {
+      try {
+        await Axios.put(url, body);
+      } catch (err) {
+        console.log(err);
+        localStorage.removeItem("token");
+      }
+    },
+    async requestDELETE(_, { url }) {
+      try {
+        await Axios.delete(url);
       } catch (err) {
         console.log(err);
         localStorage.removeItem("token");

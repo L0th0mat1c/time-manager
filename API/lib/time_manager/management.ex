@@ -88,7 +88,11 @@ defmodule TimeManager.Management do
       ** (Ecto.NoResultsError)
 
   """
-  def get_working_time!(userID) do
+  def get_working_time!(id) do
+    Repo.one(from w in WorkingTime, where: w.id == ^id, select: w)
+  end
+
+  def get_all_working_time_by_user!(userID) do
     Repo.all(from w in WorkingTime, where: w.user == ^userID, select: w)
   end
 
