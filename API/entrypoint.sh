@@ -4,16 +4,16 @@
 ls
 
 # Wait until Postgres is ready
-echo "Testing if Postgres is accepting connections. {db} {5432} {postgres}"
-while ! pg_isready -q -h db -p 5432 -U postgres
+echo "Testing if Postgres is accepting connections. {$DATABASE_URL} {5432} {postgres}"
+while ! pg_isready -q -h $DATABASE_URL -p 5432 -U postgres
 do
   echo "$(date) - waiting for database to start"
   sleep 2
 done
 
 # Create, migrate, and seed database if it doesn't exist.
-if [[ -z `psql -Atqc "\\list time_manager_dev"` ]]; then
-  echo "Database time_manager_dev does not exist. Creating..."
+if [[ -z `psql -Atqc "\\list $DATABASE_URL"` ]]; then
+  echo "Database $DATABASE_URL does not exist. Creating..."
   
   mix ecto.create
   mix ecto.migrate
