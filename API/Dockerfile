@@ -16,6 +16,11 @@ RUN mix local.rebar --force
 # Compile the project
 RUN mix deps.get
 
+
+RUN mix do compile
+# COPY entrypoint.sh /usr/bin/
+RUN chmod +x entrypoint.sh
+# ENTRYPOINT ["entrypoint.sh"]
 EXPOSE 4000
 
-# CMD ["./entrypoint.sh"]
+CMD ["./entrypoint.sh"]
